@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+  <category>
+    <pattern>WHO ARE YOU</pattern>
+    <template>I am Alice, nice to meet you!</template>
+  </category>
+  <category>
+    <pattern>HELLO</pattern>
+    <template>Bonjour a toi aussi.</template>
+  </category>
+  <category>
+    <pattern>*</pattern>
+    <template>I am sorry, my answers are limited -- you must provide the right questions.</template>
+  </category>
+</aiml>
