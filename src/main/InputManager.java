@@ -11,15 +11,42 @@ public class InputManager {
 	}
 
 	public void check(){
-		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
-		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP);
 
-		while(Keyboard.next()){
-			if(keyDown){
-				mainGame.changeCursorPos(1);
+		boolean keyEnter = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
+		boolean keyEsc = Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
+
+		if(mainGame.inGame()){
+			while(Keyboard.next()){
+				//System.out.print(Keyboard.getEventCharacter());
+				if(keyEnter){
+
+				}else if(keyEsc){
+					mainGame.escIsDown();
+				}else{
+					if (Keyboard.getEventKeyState()) {
+						mainGame.addCharToLine(Keyboard.getEventCharacter());
+					}
+				}
+
 			}
-			if(keyUp){
-				mainGame.changeCursorPos(-1);
+
+		}else{
+			boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
+			boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP);
+
+			while(Keyboard.next()){
+				if(keyDown){
+					mainGame.changeCursorPos(1);
+				}
+				if(keyUp){
+					mainGame.changeCursorPos(-1);
+				}
+				if(keyEnter){
+					mainGame.enterIsDown();
+				}
+				if(keyEsc){
+					mainGame.escIsDown();
+				}
 			}
 		}
 

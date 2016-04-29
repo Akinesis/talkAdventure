@@ -16,6 +16,10 @@ public class LineOfText {
 		nbChar = text.length();
 	}
 	
+	public void addText(String toAdd){
+		text += toAdd;
+	}
+	
 	public String getText(){
 		return text;
 	}

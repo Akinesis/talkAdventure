@@ -25,6 +25,7 @@ public class Window {
 	private boolean inMenu;
 	private long lastFPS;
 	private Cursor cursor;
+	private Font awtFont;
 
 	public Window(int width, int heigth){
 		try{
@@ -42,6 +43,8 @@ public class Window {
 		defaultFontSize = 24;
 		inMenu = true;
 		cursor = new Cursor();
+		
+		awtFont = new Font("Manaspace Regular", Font.PLAIN,24);
 		
 		lastFPS = getTime();
 
@@ -75,8 +78,8 @@ public class Window {
 		
 		if(inMenu){
 			//dessin du curseur devant le menu
-			if (getTime() - lastFPS > 500) {
-				lastFPS +=500;
+			if (getTime() - lastFPS > 400) {
+				lastFPS +=400;
 				//blink du cursseur
 				cursor.changeVisbility();
 			}
@@ -110,10 +113,14 @@ public class Window {
 		glMatrixMode(GL_MODELVIEW);
 	}
 	
+	
+	//méthode de création et modification de la Font
 	private void initFonts() {
 
-		Font awtFont = new Font("Manaspace Regular", Font.PLAIN,12);
-
+		if(uniFont != null){
+			uniFont.destroy();
+		}
+		
 		uniFont = new UnicodeFont(awtFont, defaultFontSize, false, false);
 		uniFont.addAsciiGlyphs();
 		uniFont.addGlyphs(400, 600);         // Setting the unicode Range
@@ -125,8 +132,11 @@ public class Window {
 	}
 	
 	public void changeFontSize(int size){
-		Font awtFont = new Font("Manaspace Regular", Font.PLAIN,12);
 
+		if(uniFont != null){
+			uniFont.destroy();
+		}
+		
 		uniFont = new UnicodeFont(awtFont, size, false, false);
 		uniFont.addAsciiGlyphs();
 		uniFont.addGlyphs(400, 600);         // Setting the unicode Range
@@ -137,8 +147,11 @@ public class Window {
 	}
 	
 	public int[] getStringSize(String text, int fontSize){
-		Font awtFont = new Font("Manaspace Regular", Font.PLAIN,12);
-
+		
+		if(uniFont != null){
+			uniFont.destroy();
+		}
+		
 		uniFont = new UnicodeFont(awtFont, fontSize, false, false);
 		uniFont.addAsciiGlyphs();
 		uniFont.addGlyphs(400, 600);         // Setting the unicode Range
@@ -158,6 +171,7 @@ public class Window {
 		cursor.changeCursorPos(y);
 	}
 	
+	//méthode relative à la fenêtre
 	public boolean isClose(){
 		return Display.isCloseRequested();
 	}
@@ -189,8 +203,16 @@ public class Window {
 	}
 
 	
+	//autres méthodes
 	public void messageToDraw(LineOfText mess){
 		onScreen.add(mess);
+	}
+	
+	public void messageToDraw(Vector<LineOfText> currentScreen) {
+		for(LineOfText line : currentScreen){
+			onScreen.add(line);
+		}
+		
 	}
 	
 	public void clearScreen(){
@@ -199,6 +221,23 @@ public class Window {
 	
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+	}
+
+
+	public boolean isInMenu() {
+		return inMenu;
+	}
+	
+	public void setInMenu(boolean set){
+		inMenu = set;
+	}
+	
+	public int getPosMenu(){
+		return cursor.getCurrentPos();
+	}
+	
+	public void hideCursor(){
+		cursor.hideCursor();
 	}
 
 }

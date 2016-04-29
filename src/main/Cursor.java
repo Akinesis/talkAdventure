@@ -10,8 +10,8 @@ public class Cursor {
 		cursor = new LineOfText(385, 293, " > ", 45);
 		cursorPos = new int[3];
 		cursorPos[0] = 293;
-		cursorPos[1] = 293 + 31;
-		cursorPos[2] = 293 + 31 + 40;
+		cursorPos[1] = 293 + 34;
+		cursorPos[2] = 293 + 34 + 44;
 		
 		cursorIsVisible = false;
 		currentPos = 0;
@@ -39,6 +39,10 @@ public class Cursor {
 		cursorIsVisible = !cursorIsVisible;
 	}
 	
+	public void hideCursor(){
+		cursorIsVisible = false;
+	}
+	
 	public boolean getVisibility(){
 		return cursorIsVisible;
 	}
@@ -57,5 +61,9 @@ public class Cursor {
 	
 	public String getText(){
 		return " > ";
+	}
+	
+	public int getCurrentPos(){
+		return currentPos;
 	}
 }
