@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
-	<classpathentry kind="lib" path="C:/Users/joachim/workspace/talkAdventure/res/Jars/slick.jar"/>
-	<classpathentry kind="lib" path="C:/Users/joachim/workspace/talkAdventure/res/Jars/Ab.jar"/>
-	<classpathentry kind="lib" path="C:/Users/joachim/workspace/talkAdventure/res/Jars/lwjgl.jar">
+	<classpathentry kind="lib" path="/Users/joachimvanoni/Documents/workspace/talkAdventure/res/Jars/Ab.jar"/>
+	<classpathentry kind="lib" path="/Users/joachimvanoni/Documents/workspace/talkAdventure/res/Jars/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/joachim/lwjgl-2.9.1/native/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/joachimvanoni/Documents/lwjgl-2.9.1/native/macosx"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/joachimvanoni/Documents/workspace/talkAdventure/res/Jars/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
