@@ -17,9 +17,8 @@ public class InputManager {
 
 		if(mainGame.inGame()){
 			while(Keyboard.next()){
-				//System.out.print(Keyboard.getEventCharacter());
 				if(keyEnter){
-
+					mainGame.enterIsDown();
 				}else if(keyEsc){
 					mainGame.escIsDown();
 				}else{

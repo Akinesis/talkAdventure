@@ -1,30 +1,40 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import openGL.Window;
 import robots.BotsManager;
+import state.*;
 
 public class Game {
 	BotsManager botManager;
 	Window gameWindow;
 	InputManager inputManager;
 	TextManager textManager;
+	State currentState;
+	State menuState, gameState, optionState, quitterState;
+
 
 	public Game(){
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		gameWindow = new Window(1024, 576);
 		botManager = new BotsManager();
 		inputManager = new InputManager(this);
 		textManager = new TextManager(gameWindow);
+		botManager = new BotsManager();
+
+		//gestion des States
+		menuState = new MenuState(this);
+		gameState = new GameState(this);
+		optionState = new OptionState(this);
+		quitterState = new QuitState(this);
+
+		currentState = menuState;
+
 
 		//gameWindow.messageToDraw(new LineOfText(0, 0, botManager.dialogue(), 24));
-		initialScreen();
+		//initialScreen();
+		currentState.isShow();
 
 		start();
 
-		botManager = new BotsManager();
 	}
 
 	private void start(){
@@ -34,12 +44,13 @@ public class Game {
 			inputManager.check();
 		}
 	}
-	
+
 	private void gameStart(){
 		gameWindow.clearScreen();
-		gameWindow.setInMenu(false);
-		gameWindow.hideCursor();
-		
+		/*gameWindow.setInMenu(false);
+		gameWindow.hideCursor();*/
+		currentState = gameState;
+
 		textManager.setIsInGame(true);
 		textManager.gamingScreen();
 	}
@@ -52,9 +63,38 @@ public class Game {
 		gameWindow.changeCursorPos(y);
 	}
 
+
+	public void escIsDown() {
+		gameWindow.clearScreen();
+		gameWindow.setInMenu(false);
+		//afficher le curseur
+		textManager.escScreen();
+	}
+
+	public void addCharToLine(char character){
+		textManager.addCharToLine(character);
+	}
+
+	public TextManager getTexManager() {
+		return textManager;
+	}
+	
+	/**
+	 * Méthode de gestion des states
+	 * 
+	 * 
+	 */
+	public void setState(State newState){
+		currentState = newState;
+	}
+	
+	public boolean inGame(){
+		return currentState == gameState;
+	}
+	
 	public void enterIsDown() {
 		//si on est sur le menu
-		if(gameWindow.isInMenu()){
+		/*if(currentState == menuState){
 			int pos = gameWindow.getPosMenu();
 
 			switch(pos){
@@ -68,25 +108,9 @@ public class Game {
 			default:
 				break;
 			}
-		}
-		
-
+		}*/
+		currentState.enterIsDown();
 	}
 
-	public boolean inGame(){
-		return textManager.getIsInGame();
-	}
-	
-	public void escIsDown() {
-		gameWindow.clearScreen();
-		gameWindow.setInMenu(false);
-		//afficher le curseur
-		textManager.escScreen();
-	}
-	
-	public void addCharToLine(char character){
-		textManager.addCharToLine(character);
-	}
-	
-	
+
 }
